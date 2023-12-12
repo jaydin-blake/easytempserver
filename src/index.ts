@@ -22,13 +22,19 @@ const device2: Device = {
     deviceDescription: "Device 2",
 };
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
+const DB_HOST = process.env.DB_HOST || "sql3.freesqldatabase.com";
+const DB_USER = process.env.DB_USER || "sql3665929";
+const DB_PASSWORD = process.env.DB_PASSWORD || "Pd7llapQlE";
+const DB_NAME = process.env.DB_NAME || "sql3665929";
+
+// Create a connection pool with environment variables
 const connection = mysql.createConnection({
-    host: "sql3.freesqldatabase.com",
-    user: "sql3665929",
-    password: "Pd7llapQlE",
-    database: "sql3665929",
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
 });
 const util = require("util");
 const query = util.promisify(connection.query).bind(connection);
